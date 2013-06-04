@@ -8,7 +8,8 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    "nl.rhinofly" %% "api-s3" % "2.6.1"
+    "nl.rhinofly" %% "api-s3" % "2.6.1",
+    "commons-io" % "commons-io" % "2.4"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
