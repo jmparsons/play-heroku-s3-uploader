@@ -1,0 +1,25 @@
+@(assets: Iterable[fly.play.s3.BucketItem], bucketName: String)(implicit flash: Flash)
+
+@import helper._
+
+@main("Uploader") {
+
+  <h1>play-heroku-s3-uploader</h1>
+
+  @flash.get("error").map { msg => @msg }
+
+  @helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
+    <input type="file" name="file">
+    <p><input type="submit"></p>
+  }
+
+  <h2>Media</h2>
+  <ul class="unstyled">
+  @for(asset <- assets.toList) {
+    @if(!asset.name.endsWith("/")) {
+      <li><a href="http://@bucketName/@asset.name">@asset.name.replace("uploads/", "")</a></li>
+    }
+  }
+  </ul>
+
+}
